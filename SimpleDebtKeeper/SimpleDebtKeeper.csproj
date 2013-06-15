@@ -63,6 +63,7 @@
     <Content Include="scripts\lib\knockout.js" />
     <Content Include="scripts\lib\testing\qunit.js" />
     <Content Include="scripts\lib\testing\tests\app.js" />
+    <Content Include="scripts\lib\testing\tests\summary.js" />
     <Content Include="scripts\lib\underscore.js" />
     <Content Include="styles\testing\qunit.css" />
     <Content Include="tests\index.html" />

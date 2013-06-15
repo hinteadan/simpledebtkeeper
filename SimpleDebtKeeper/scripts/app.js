@@ -1,4 +1,5 @@
 ﻿/// <reference path="~/scripts/lib/knockout.js" />
+/// <reference path="~/scripts/lib/underscore.js" />
 
 (function () {
 
@@ -33,6 +34,10 @@
 
         this.Query = function () {
             return data;
+        }
+
+        this.GroupBy = function (propertyOrFunction) {
+            return _(data).groupBy(propertyOrFunction);
         }
 
         construct();
