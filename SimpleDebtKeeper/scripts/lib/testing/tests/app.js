@@ -34,15 +34,6 @@
         ok(typeof debt.Reason !== 'undefined', "Has Reason property");
     });
 
-    module("Debts CRUD", {
-        setup: function () {
-            appWithEmptyRepository = new App.AppModule();
-            appWithSomeRepository = new App.AppModule(new DataRepository(function () {
-                return [new App.Model.Debt()];
-            }));
-        }
-    });
-
     test("Add", function () {
         var debts = appWithEmptyRepository.Repository().Query();
         ok(debts.length === 0, "No debts at start");
@@ -63,6 +54,19 @@
         ok(debts.length > 0, "Some debts at start");
         appWithSomeRepository.Repository().Remove(debtToDelete);
         ok(!_(debts).contains(debtToDelete));
+    });
+
+    test("Edit", function () {
+        var debts = appWithSomeRepository.Repository().Query(),
+            debtToEdit = debts[0];
+
+        ok(debts.length > 0, "Some debts at start");
+        debtToEdit.Person = "Some other person";
+        debtToEdit.Amount = 666;
+        debtToEdit.Reason = "Edit test";
+        ok(debtToEdit.Person === "Some other person");
+        ok(debtToEdit.Amount === 666);
+        ok(debtToEdit.Reason === "Edit test");
     });
 
 }).call(this);
