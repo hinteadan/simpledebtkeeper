@@ -9,8 +9,21 @@
 </head>
 <body>
     
+    <h1>Debts Summary</h1>
 
+    <ul data-bind="foreach: SummaryData">
+        <li>
+            <span data-bind="text: Person"></span>
+            <span data-bind="text: Amount, style: {
+                color: Type === App.Model.DebtType.YouOwePerson ? 'red' : ''
+            }"></span>
+        </li>
+    </ul>
 
+    <script src="data.js" type="text/javascript"></script>
     <script src="scripts/app.js" type="text/javascript"></script>
+    <script src="scripts/SummaryViewModel.js" type="text/javascript"></script>
+    <script src="scripts/main.js" type="text/javascript"></script>
+
 </body>
 </html>

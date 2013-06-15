@@ -16,7 +16,14 @@
 
         function construct() {
             if (isFunction(initialDataFactory)) {
-                data = initialDataFactory.call(rootScope);
+                data = _(initialDataFactory.call(rootScope)).map(function (item) {
+                    return new appModels.Debt(
+                        item.Person,
+                        item.Type,
+                        item.Amount,
+                        item.Reason
+                        );
+                });
             }
         };
 
