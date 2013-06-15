@@ -30,4 +30,18 @@
 
     });
 
+    test("Summary totals", function () {
+
+        var summary = app.SummaryData();
+
+        ok(summary.length === 2);
+        ok(summary[0].Person === "Ioana");
+        ok(summary[0].Type === App.Model.DebtType.PersonOwesYou);
+        ok(summary[0].Amount === 120);
+        ok(summary[1].Person === "Iulian");
+        ok(summary[1].Type === App.Model.DebtType.PersonOwesYou);
+        ok(summary[1].Amount === 25);
+
+    });
+
 }).call(this);

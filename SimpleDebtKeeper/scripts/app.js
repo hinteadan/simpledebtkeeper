@@ -3,7 +3,8 @@
 
 (function () {
 
-    var rootScope = this;
+    var rootScope = this,
+        appModels = new AppModel();
 
     function isFunction(f){
         return typeof f === 'function';
@@ -55,6 +56,12 @@
             this.Amount = typeof amount !== 'undefined' ? amount : null;
             this.Reason = typeof reason !== 'undefined' ? reason : null;
         };
+
+        this.DebtGroupSummary = function (person, type, amount) {
+            this.Person = typeof person !== 'undefined' ? person : null;
+            this.Type = typeof type !== 'undefined' ? type : null;
+            this.Amount = typeof amount !== 'undefined' ? amount : null;
+        };
     }
 
     function App(dataRepository) {
@@ -64,11 +71,27 @@
         this.Repository = function () {
             return dataRepository;
         }
+
+        this.SummaryData = function () {
+            return _(dataRepository.GroupBy('Person'))
+                .map(function (debts, person) {
+
+                    var amountPersonOwesYou = _(debts).reduce(function (sum, debt) {
+                        return sum + (debt.Type === appModels.DebtType.PersonOwesYou ? debt.Amount : -debt.Amount)
+                    }, 0);
+
+                    return new appModels.DebtGroupSummary(
+                        person,
+                        amountPersonOwesYou < 0 ? appModels.DebtType.YouOwePerson : appModels.DebtType.PersonOwesYou,
+                        amountPersonOwesYou
+                        );
+                });
+        }
     }
 
     this.App = {
         AppModule: App,
-        Model: new AppModel()
+        Model: appModels
     };
     this.DataRepository = DataRepository;
 
