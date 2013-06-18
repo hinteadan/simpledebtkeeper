@@ -9,7 +9,10 @@
     ko.applyBindings(
         new App.SummaryViewModel(
             new App.AppModule(new DataRepository(
-                create.sync(function () { return DataSet; }))
+                    function(){
+                        return create.sync(function () { return DataSet; });
+                    }
+                )
             )
         )
     );

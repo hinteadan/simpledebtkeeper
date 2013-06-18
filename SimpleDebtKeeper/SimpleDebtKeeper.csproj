@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="data.js" />
+    <Content Include="details.html" />
     <Content Include="index.html" />
     <Content Include="scripts\app.js" />
     <Content Include="scripts\lib\factory.js" />
