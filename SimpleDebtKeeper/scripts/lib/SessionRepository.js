@@ -9,6 +9,9 @@
         }
 
         function Fetch() {
+            if (!sessionStorage[key]) {
+                return null;
+            }
             return JSON.parse(sessionStorage[key]);
         }
 

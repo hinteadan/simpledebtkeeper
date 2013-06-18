@@ -1,5 +1,6 @@
 ﻿/// <reference path="~/scripts/lib/knockout.js" />
 /// <reference path="~/scripts/lib/underscore.js" />
+/// <reference path="~/scripts/lib/SessionRepository.js" />
 
 (function () {
 
@@ -12,9 +13,15 @@
 
     function DataRepository(initialDataFactory) {
 
-        var data = [];
+        var data = [],
+            sessionRepository = new SessionRepository();
 
         function construct() {
+            data = sessionRepository.Fetch() || [];
+            if (data && data.length && data.length > 0) {
+                return;
+            }
+
             if (isFunction(initialDataFactory)) {
                 data = _(initialDataFactory.call(rootScope)).map(function (item) {
                     return new appModels.Debt(
@@ -25,10 +32,13 @@
                         );
                 });
             }
+
+            sessionRepository.Save(data);
         };
 
         this.Add = function (item) {
             data.push(item);
+            sessionRepository.Save(data);
         }
 
         this.Remove = function (item) {
@@ -38,6 +48,7 @@
                 }
                 data.splice(index, 1);
             }
+            sessionRepository.Save(data);
         }
 
         this.Query = function () {
