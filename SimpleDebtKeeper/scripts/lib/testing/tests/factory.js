@@ -6,14 +6,14 @@
     module("Factory library");
 
     test("Synchronous factory", function () {
-        var instance = factory(function () { return new dummyObject(); });
+        var instance = create.sync(function () { return new dummyObject(); });
 
         ok(typeof instance !== undefined, "Instance is created");
         ok(instance.dummyObjectIdentifier !== undefined, "Instance is of expected type");
     });
 
     asyncTest("Asynchronous factory", 2, function () {
-        var instance = asyncFactory(
+        var instance = create.async(
             function (onDone) {
                 setTimeout(function () {
                     instance = new dummyObject();
@@ -29,7 +29,7 @@
     });
 
     asyncTest("Asynchronous factory times out", 2, function () {
-        var instance = asyncFactory(
+        var instance = create.async(
             function (onDone) {
                 setTimeout(function () {
                     instance = new dummyObject();
@@ -39,35 +39,43 @@
                 ok(typeof instance !== undefined, "Instance is created");
                 ok(instance.dummyObjectIdentifier !== undefined, "Instance is of expected type");
                 start();
-            }
-            );
+            },
+            500);
     });
 
     function dummyObject() {
         this.dummyObjectIdentifier = -1;
     }
 
-    function asyncFactory(creationFunc, doneNotifierFunc) {
+    function factory() {
 
-        var result = {},
-            timeoutInMilliseconds = 1000,
-            doneNotifier = wrapDoneNotifierFunc(),
-            timeoutId = setTimeout(doneNotifier, timeoutInMilliseconds);
-
-        function wrapDoneNotifierFunc() {
-            return function () {
-                clearTimeout(timeoutId);
-                doneNotifierFunc.call(this);
-            };
+        function factory(creationFunc) {
+            return creationFunc.call(this);
         }
 
-        creationFunc.call(this, doneNotifier);
+        function asyncFactory(creationFunc, doneNotifierFunc, millisecondsToTimeout) {
 
-        return result;
+            var result = {},
+                timeoutInMilliseconds = millisecondsToTimeout || 30000,
+                doneNotifier = wrapDoneNotifierFunc(),
+                timeoutId = setTimeout(doneNotifier, timeoutInMilliseconds);
+
+            function wrapDoneNotifierFunc() {
+                return function () {
+                    clearTimeout(timeoutId);
+                    doneNotifierFunc.call(this);
+                };
+            }
+
+            creationFunc.call(this, doneNotifier);
+
+            return result;
+        }
+
+        this.sync = factory;
+        this.async = asyncFactory;
     }
 
-    function factory(creationFunc) {
-        return creationFunc.call(this);
-    }
+    var create = new factory();
 
 }).call(this);
