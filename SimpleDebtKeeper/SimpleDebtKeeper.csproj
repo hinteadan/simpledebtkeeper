@@ -60,6 +60,7 @@
     <Content Include="data.js" />
     <Content Include="index.html" />
     <Content Include="scripts\app.js" />
+    <Content Include="scripts\lib\factory.js" />
     <Content Include="scripts\lib\jquery.js" />
     <Content Include="scripts\lib\knockout.js" />
     <Content Include="scripts\lib\testing\qunit.js" />

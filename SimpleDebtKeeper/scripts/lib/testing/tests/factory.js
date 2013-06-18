@@ -1,5 +1,6 @@
 ﻿/// <reference path="~/scripts/lib/testing/qunit.js" />
 /// <reference path="~/scripts/lib/underscore.js" />
+/// <reference path="~/scripts/lib/factory.js" />
 
 (function () {
 
@@ -47,35 +48,6 @@
         this.dummyObjectIdentifier = -1;
     }
 
-    function factory() {
-
-        function factory(creationFunc) {
-            return creationFunc.call(this);
-        }
-
-        function asyncFactory(creationFunc, doneNotifierFunc, millisecondsToTimeout) {
-
-            var result = {},
-                timeoutInMilliseconds = millisecondsToTimeout || 30000,
-                doneNotifier = wrapDoneNotifierFunc(),
-                timeoutId = setTimeout(doneNotifier, timeoutInMilliseconds);
-
-            function wrapDoneNotifierFunc() {
-                return function () {
-                    clearTimeout(timeoutId);
-                    doneNotifierFunc.call(this);
-                };
-            }
-
-            creationFunc.call(this, doneNotifier);
-
-            return result;
-        }
-
-        this.sync = factory;
-        this.async = asyncFactory;
-    }
-
-    var create = new factory();
+    var create = new Factory();
 
 }).call(this);
