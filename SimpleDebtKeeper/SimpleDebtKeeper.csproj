@@ -63,6 +63,7 @@
     <Content Include="scripts\lib\factory.js" />
     <Content Include="scripts\lib\jquery.js" />
     <Content Include="scripts\lib\knockout.js" />
+    <Content Include="scripts\lib\SessionRepository.js" />
     <Content Include="scripts\lib\testing\qunit.js" />
     <Content Include="scripts\lib\testing\tests\app.js" />
     <Content Include="scripts\lib\testing\tests\factory.js" />
