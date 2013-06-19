@@ -7,6 +7,9 @@
 
         var personDebts = appModule.Repository().Query({ Person: personId });
 
+
+        this.Debts = ko.observableArray(personDebts);
+
     }
 
     this.App = this.App || {};
