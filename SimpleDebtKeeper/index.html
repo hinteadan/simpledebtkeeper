@@ -19,7 +19,7 @@
             <span data-bind="text: Amount, style: {
                 color: Type === App.Model.DebtType.YouOwePerson ? 'red' : ''
             }"></span>
-            
+            <a data-bind="attr: { href: 'details.html?id=' + Person }">Details</a>
         </li>
     </ul>
 

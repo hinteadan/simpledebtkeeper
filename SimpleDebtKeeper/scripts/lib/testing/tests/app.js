@@ -34,6 +34,17 @@
         ok(typeof debt.Reason !== 'undefined', "Has Reason property");
     });
 
+    test("Debts for person", function () {
+        var repo = appWithEmptyRepository.Repository(),
+            debts = [];
+
+        repo.Add(new App.Model.Debt("Ioana", App.Model.DebtType.PersonOwesYou, 10, "Test"));
+        repo.Add(new App.Model.Debt("Ioana", App.Model.DebtType.PersonOwesYou, 10, "Test"));
+        repo.Add(new App.Model.Debt("Iulian", App.Model.DebtType.PersonOwesYou, 10, "Test"));
+        debts = repo.Query({ Person: "Ioana" });
+        ok(debts.length === 2);
+    });
+
     test("Add", function () {
         var debts = appWithEmptyRepository.Repository().Query();
         ok(debts.length === 0, "No debts at start");

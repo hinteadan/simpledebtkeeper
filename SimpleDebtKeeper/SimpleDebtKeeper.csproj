@@ -61,6 +61,8 @@
     <Content Include="details.html" />
     <Content Include="index.html" />
     <Content Include="scripts\app.js" />
+    <Content Include="scripts\details.js" />
+    <Content Include="scripts\DetailsViewModel.js" />
     <Content Include="scripts\lib\factory.js" />
     <Content Include="scripts\lib\jquery.js" />
     <Content Include="scripts\lib\knockout.js" />

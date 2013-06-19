@@ -51,8 +51,13 @@
             sessionRepository.Save(data);
         }
 
-        this.Query = function () {
-            return data;
+        this.Query = function (query) {
+            if (!query) {
+                return data;
+            }
+            if (typeof query === "object") {
+                return _(data).where(query);
+            }
         }
 
         this.GroupBy = function (propertyOrFunction) {
