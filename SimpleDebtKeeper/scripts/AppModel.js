@@ -19,6 +19,8 @@
 
         }
 
+        this.Debt = Debt;
+
     }
 
     this.AppModel = new AppModel();
