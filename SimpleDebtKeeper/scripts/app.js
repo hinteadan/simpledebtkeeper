@@ -3,6 +3,8 @@
 
 (function () {
 
-    
+    ko.applyBindings(new SummaryViewModel(
+        new DataRepository()
+        ));
 
 }).call(this);

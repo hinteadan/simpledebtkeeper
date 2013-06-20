@@ -68,6 +68,7 @@
     <Content Include="scripts\lib\testing\qunit.js" />
     <Content Include="scripts\lib\testing\tests\app.js" />
     <Content Include="scripts\lib\testing\tests\DataRepository.js" />
+    <Content Include="scripts\SummaryViewModel.js" />
     <Content Include="scripts\_references.js" />
     <Content Include="styles\testing\qunit.css" />
     <Content Include="tests\index.html" />

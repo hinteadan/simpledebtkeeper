@@ -28,6 +28,13 @@
             Type: 0,
             Description: "Lunch",
             IsClosed: true
+        },
+        {
+            Person: "Dan",
+            Amount: 30,
+            Type: 0,
+            Description: "Lunch",
+            IsClosed: false
         }
     ];
 
