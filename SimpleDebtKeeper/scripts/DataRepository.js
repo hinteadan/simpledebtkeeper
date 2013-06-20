@@ -2,7 +2,7 @@
 
     function DataRepository() {
 
-        var data = []
+        var data = [];
 
         function getSummaryData() {
 
@@ -22,6 +22,12 @@
 
         }
 
+        function closeAllDebtsForPerson(person) {
+            _.each(_.where(data, { Person: person }), function (d) {
+                d.IsClosed = true;
+            });
+        }
+
         function construct() {
 
             data = _.map(Data, function (d) {
@@ -37,6 +43,10 @@
         }
 
         this.getSummaryData = getSummaryData;
+        this.closeAllDebtsForPerson = closeAllDebtsForPerson;
+        this.Data = function () {
+            return data;
+        };
 
         construct();
     }
