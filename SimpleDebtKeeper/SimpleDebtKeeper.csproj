@@ -59,6 +59,8 @@
   <ItemGroup>
     <Content Include="index.html" />
     <Content Include="scripts\app.js" />
+    <Content Include="scripts\AppModel.js" />
+    <Content Include="scripts\Data.js" />
     <Content Include="scripts\lib\jquery.js" />
     <Content Include="scripts\lib\knockout.js" />
     <Content Include="scripts\lib\testing\qunit.js" />
