@@ -1,4 +1,4 @@
-﻿(function () {
+﻿(function (_, AppModel, Data, undefined) {
 
     function DataRepository() {
 
@@ -53,4 +53,4 @@
 
     this.DataRepository = DataRepository;
 
-}).call(this);
+}).call(this, this._, this.AppModel, this.Data);

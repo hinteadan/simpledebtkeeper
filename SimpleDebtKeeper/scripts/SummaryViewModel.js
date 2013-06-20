@@ -1,4 +1,4 @@
-﻿(function () {
+﻿(function (ko) {
 
     function SummaryViewModel(dataRepository) {
 
@@ -25,4 +25,4 @@
 
     this.SummaryViewModel = SummaryViewModel;
 
-}).call(this);
+}).call(this, window.ko);
